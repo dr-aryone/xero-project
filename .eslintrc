@@ -1,0 +1,19 @@
+{
+ “extends”: [
+
+ ],
+# // “parser”: “babel-eslint”
+ “plugins”: [
+
+ ],
+ “env”: {
+
+ },
+ “ecmaFeatures”: {
+
+ },
+ “rules”: {
+    “comma-dangle”: [1, “always-multiline”],
+    “no-underscore-dangle” : 0,
+ }
+}
