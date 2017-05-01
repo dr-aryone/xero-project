@@ -2,3 +2,4 @@ node_modules
 dist
 config.json
 public-privatekey-Helens-App.pfx
+privatekey-Helens-App.pem
