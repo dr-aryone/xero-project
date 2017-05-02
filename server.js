@@ -32,7 +32,7 @@ app.use(bodyParser.json());
 
 
 // Print out a count of invoices
-app.get('/xero', function(req, res) {
+app.get('/xero/invoices', function(req, res) {
     console.log('in route', xeroClient.core.invoices.getInvoices);
     var filter = 'Status == "AUTHORISED"';
 
@@ -42,7 +42,7 @@ app.get('/xero', function(req, res) {
         .then(function(invoices) {
             console.log("Invoices: " + invoices.length);
             var response = {
-                length: invoices.length
+                invoices
             }
             res.json(response);
         }).catch(function(err) {
@@ -52,34 +52,61 @@ app.get('/xero', function(req, res) {
 
 
 //Print the name of a contact
-xeroClient.core.contacts.getContacts({
-        where: 'Name.Contains("Bayside")'
-    })
-    .then(function(contacts) {
-            contacts.forEach(function(contact) {
-                    console.log(contact.Name);
-                 var contactResponse = {
-                     contact.Name
-                 }
-                res.json(contactResponse);
-            }).catch(function(err) {
-            console.log(err);
-        });
-    });
+
+app.get('/xero/contacts', function(req, res) {
+            xeroClient.core.contacts.getContacts({
+                    where: 'Name.Contains("Bayside")'
+                })
+                .then(function(contacts) {
+                  console.log('arguments', arguments);
+                    // contacts.forEach(function(contact) {
+                    //     console.log(contact.Name);
+                    //         name: contact.Name
+                    //     }
+                        return res.json(contacts);
+                    }).catch(function(err) {
+                        console.log(err);
+                    });
+                });
+
+            /*filter contacts that are type Customer
+            var filter = 'IsCustomer == true';
+
+            xeroClient.core.contacts.getContacts({where: filter})
+               .then(function(contacts) {
+                  //We've got some contacts
+                  contacts.forEach(function(contact){
+                     //do something useful
+                     console.log(contact.IsCustomer); //will be true
+                  });
+               }) */
+
+            app.listen(3333, function() {
+                console.log('Server listening');
+            });
 
 
-/*filter contacts that are type Customer
-var filter = 'IsCustomer == true';
 
-xeroClient.core.contacts.getContacts({where: filter})
-   .then(function(contacts) {
-      //We've got some contacts
-      contacts.forEach(function(contact){
-         //do something useful
-         console.log(contact.IsCustomer); //will be true
-      });
-   }) */
 
-app.listen(3333, function() {
-    console.log('Server listening');
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //     var contactResponse = {
