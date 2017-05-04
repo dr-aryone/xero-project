@@ -44,7 +44,7 @@ app.get('/xero/invoices', function(req, res) {
             var response = {
                 invoices
             }
-            res.json(response);
+            res.json(response)
         }).catch(function(err) {
             console.log(err);
         });
@@ -69,44 +69,7 @@ app.get('/xero/contacts', function(req, res) {
                     });
                 });
 
-            /*filter contacts that are type Customer
-            var filter = 'IsCustomer == true';
-
-            xeroClient.core.contacts.getContacts({where: filter})
-               .then(function(contacts) {
-                  //We've got some contacts
-                  contacts.forEach(function(contact){
-                     //do something useful
-                     console.log(contact.IsCustomer); //will be true
-                  });
-               }) */
 
             app.listen(3333, function() {
                 console.log('Server listening');
             });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //     var contactResponse = {
